@@ -1,0 +1,7 @@
+### Health
+GET http://localhost:8080/api/health
+Accept: application/json
+
+### Demo campaña
+GET http://localhost:8080/api/campanas/demo
+Accept: application/json
