@@ -5,3 +5,33 @@ Accept: application/json
 ### Demo campaña
 GET http://localhost:8080/api/campanas/demo
 Accept: application/json
+
+### Crear campaña válida
+POST http://localhost:8080/api/campanas
+Content-Type: application/json
+
+
+
+{
+  "parcelaId": 10,
+  "cultivoId": 3,
+  "fechaInicio": "2026-03-01"
+}
+
+### Crear campaña inválida (falta cultivoId)
+POST http://localhost:8080/api/campanas
+Content-Type: application/json
+
+{
+  "parcelaId": 10,
+  "fechaInicio": "2026-03-01"
+}
+
+### Listar campañas
+GET http://localhost:8080/api/campanas
+
+### Buscar campaña existente
+GET http://localhost:8080/api/campanas/1
+
+### Buscar campaña inexistente
+GET http://localhost:8080/api/campanas/999
