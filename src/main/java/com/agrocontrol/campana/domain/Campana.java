@@ -4,13 +4,13 @@ import java.time.LocalDate;
 
 public class Campana {
 
-    private final Long id;
-    private final Long parcelaId;
-    private final Long cultivoId;
+    private final Integer id;
+    private final Integer parcelaId;
+    private final Integer cultivoId;
     private final LocalDate fechaInicio;
     private String estado;
 
-    public Campana(Long id, Long parcelaId, Long cultivoId, LocalDate fechaInicio) {
+    public Campana(Integer id, Integer parcelaId, Integer cultivoId, LocalDate fechaInicio) {
         this.id = id;
         this.parcelaId = parcelaId;
         this.cultivoId = cultivoId;
@@ -18,9 +18,17 @@ public class Campana {
         this.estado = "PLANIFICADA";
     }
 
-    public Long getId() { return id; }
-    public Long getParcelaId() { return parcelaId; }
-    public Long getCultivoId() { return cultivoId; }
+    public Campana(Integer id, Integer parcelaId, Integer cultivoId, LocalDate fechaInicio, String estado) {
+        this.id = id;
+        this.parcelaId = parcelaId;
+        this.cultivoId = cultivoId;
+        this.fechaInicio = fechaInicio;
+        this.estado = estado;
+    }
+
+    public Integer getId() { return id; }
+    public Integer getParcelaId() { return parcelaId; }
+    public Integer getCultivoId() { return cultivoId; }
     public LocalDate getFechaInicio() { return fechaInicio; }
     public String getEstado() { return estado; }
 }

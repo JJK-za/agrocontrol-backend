@@ -35,7 +35,7 @@ public class CampanaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CampanaResponse> buscarPorId(@PathVariable Long id) {
+    public ResponseEntity<CampanaResponse> buscarPorId(@PathVariable Integer id) {
         return service.buscarPorId(id)
                 .map(c -> ResponseEntity.ok(toResponse(c)))
                 .orElse(ResponseEntity.notFound().build());

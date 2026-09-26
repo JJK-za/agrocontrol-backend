@@ -1,33 +1,37 @@
 package com.agrocontrol.campana.application;
 
 import com.agrocontrol.campana.domain.Campana;
+import com.agrocontrol.campana.infrastructure.adapter.out.persistence.entity.CampanaJpaEntity;
+import com.agrocontrol.campana.infrastructure.adapter.out.persistence.mapper.CampanaPersistenceMapper;
+import com.agrocontrol.campana.infrastructure.adapter.out.persistence.repository.SpringDataCampanaRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.concurrent.atomic.AtomicLong;
 
 @Service
 public class CampanaService {
 
-    private final List<Campana> elementos = new ArrayList<>();
-    private final AtomicLong secuencia = new AtomicLong(0);
+    private final SpringDataCampanaRepository repository;
 
-    public Campana registrar(Long parcelaId, Long cultivoId, LocalDate fechaInicio) {
-        Campana campana = new Campana(secuencia.incrementAndGet(), parcelaId, cultivoId, fechaInicio);
-        elementos.add(campana);
-        return campana;
+    public CampanaService(SpringDataCampanaRepository repository) {
+        this.repository = repository;
+    }
+
+    public Campana registrar(Integer parcelaId, Integer cultivoId, LocalDate fechaInicio) {
+        CampanaJpaEntity entity = new CampanaJpaEntity(parcelaId, cultivoId, fechaInicio, "PLANIFICADA");
+        CampanaJpaEntity guardada = repository.save(entity);
+        return CampanaPersistenceMapper.toDomain(guardada);
     }
 
     public List<Campana> listar() {
-        return List.copyOf(elementos);
+        return repository.findAll().stream()
+                .map(CampanaPersistenceMapper::toDomain)
+                .toList();
     }
 
-    public Optional<Campana> buscarPorId(Long id) {
-        return elementos.stream()
-                .filter(c -> c.getId().equals(id))
-                .findFirst();
+    public Optional<Campana> buscarPorId(Integer id) {
+        return repository.findById(id).map(CampanaPersistenceMapper::toDomain);
     }
 }

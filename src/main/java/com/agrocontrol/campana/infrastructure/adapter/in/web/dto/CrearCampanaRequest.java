@@ -6,10 +6,10 @@ import java.time.LocalDate;
 
 public record CrearCampanaRequest(
         @NotNull(message = "La parcela es obligatoria")
-        Long parcelaId,
+        Integer parcelaId,
 
         @NotNull(message = "El cultivo es obligatorio")
-        Long cultivoId,
+        Integer cultivoId,
 
         @NotNull(message = "La fecha de inicio es obligatoria")
         LocalDate fechaInicio
