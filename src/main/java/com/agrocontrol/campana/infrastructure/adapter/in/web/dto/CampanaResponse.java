@@ -7,5 +7,6 @@ public record CampanaResponse(
         Integer parcelaId,
         Integer cultivoId,
         LocalDate fechaInicio,
+        LocalDate fechaFin,
         String estado
 ) {}
